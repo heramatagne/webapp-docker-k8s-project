@@ -8,15 +8,16 @@ pipeline {
         // DOCKERFILE_PATH = 'webapp/Dockerfile'
         DOCKER_IMAGE_TAG = 'slick'
         // KUBECONFIG = credentials('your-kubeconfig-credential-id')
-        DOCKER_HUB_REPO = 'herasidi/centos_webapp'
+        // DOCKER_HUB_REPO = 'herasidi/centos_webapp'
+        GIT_REPO_URL = 'https://github.com/heramatagne/webapp-docker-k8s-project/blob/main/webapp/Dockerfile'        
     }
     
     stages {
         stage('Build Docker Image') {
             steps {
                 script {
-                    // Build Docker image using Dockerfile
-                    docker.build("${DOCKER_HUB_REPO}:${DOCKER_IMAGE_TAG}", "/var/lib/jenkins/workspace/eks-app/webapp/Dockerfile")
+                    // Build Docker image using Dockerfile from cloned repository
+                    docker.build("${DOCKER_HUB_REPO}:${DOCKER_IMAGE_TAG}", "webapp")
                     // Push the built Docker image to Docker Hub
                     docker.withRegistry('https://index.docker.io/v1/', 'docker-hub-credentials') {
                         docker.image("${DOCKER_HUB_REPO}:${DOCKER_IMAGE_TAG}").push()
