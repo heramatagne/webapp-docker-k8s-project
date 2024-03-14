@@ -15,9 +15,9 @@ pipeline {
             steps {
                 script {
                     // Build Docker image from Dockerfile in the same directory as Jenkinsfile
-                    docker.build("${DOCKER_HUB_REPO}:${DOCKER_IMAGE_TAG}")
+                    // docker.build("${DOCKER_HUB_REPO}:${DOCKER_IMAGE_TAG}")
                     // Push the built Docker image to Docker Hub
-                    docker.withRegistry('https://index.docker.io/v1/', 'docker-hub-credentials') {
+                    docker.withRegistry('https://index.docker.io/v1/', 'herasidi') {
                         docker.image("${DOCKER_HUB_REPO}:${DOCKER_IMAGE_TAG}").push()
                     }
                 }
