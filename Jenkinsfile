@@ -16,7 +16,7 @@ pipeline {
             steps {
                 script {
                     // Build Docker image using Dockerfile
-                    docker.build(DOCKER_HUB_REPO + ":" + DOCKER_IMAGE_TAG, DOCKERFILE_PATH)
+                    docker.build(DOCKER_HUB_REPO + ":" + DOCKER_IMAGE_TAG)
                     // Push the built Docker image to Docker Hub
                     docker.withRegistry('https://index.docker.io/v1/', 'docker-hub-credentials') {
                         docker.image(DOCKER_HUB_REPO + ":" + DOCKER_IMAGE_TAG).push()
