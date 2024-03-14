@@ -53,6 +53,6 @@ pipeline {
 //                     sh "kubectl apply -f path/to/kubernetes/svc.yml"
 //                 }
 //             }
-//         }
-//     }
-// }
+        }
+    // }
+}
