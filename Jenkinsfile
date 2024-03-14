@@ -5,7 +5,7 @@ pipeline {
         AWS_DEFAULT_REGION = 'us-west-2'
         EKS_CLUSTER_NAME = 'slick-cluster'
         // ECR_REPOSITORY = 'ecr-repository'
-        DOCKERFILE_PATH = 'webapp/Dockerfile' // Specify the path to your Dockerfile or its directory
+        DOCKERFILE_PATH = '/var/lib/jenkins/workspace/eks-app/webapp' // Specify the path to your Dockerfile or its directory
         DOCKER_IMAGE_TAG = 'slick'
         // KUBECONFIG = credentials('your-kubeconfig-credential-id')
         DOCKER_HUB_REPO = 'herasidi/centos_webapp' // Define your Docker Hub repository name
