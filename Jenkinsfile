@@ -31,8 +31,7 @@ pipeline {
         stage('Create EKS Cluster') {
             steps {
                 script {
-                    sh "eksctl create cluster --name centos-app --region us-west-2 --ssh-public-key=hera-us-west-2-key-pair --nodes=2 --instance-types=t2.small --role-arn arn:aws:iam::474443712911:role/my-jenkins-role"
-                    // Wait for cluster to be ready
+                    sh "aws eks create-cluster --name ${EKS_CLUSTER_NAME} --role-arn arn:aws:iam::474443712911:role/my-jenkins-role  --region ${AWS_DEFAULT_REGION}"                    // Wait for cluster to be ready
                     // sh "aws eks wait cluster-active --name ${EKS_CLUSTER_NAME} --region ${AWS_DEFAULT_REGION}"
                 }
             }
