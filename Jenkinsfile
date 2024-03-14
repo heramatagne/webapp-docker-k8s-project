@@ -7,7 +7,7 @@ pipeline {
         // ECR_REPOSITORY = 'ecr-repository'
         DOCKERFILE_PATH = 'webapp-docker-k8s-project/webapp/Dockerfile'
         DOCKER_IMAGE_TAG = 'slick'
-        KUBECONFIG = credentials('your-kubeconfig-credential-id')
+        // KUBECONFIG = credentials('your-kubeconfig-credential-id')
         DOCKER_HUB_REPO = 'herasidi/centos_webapp'
     }
     
