@@ -12,14 +12,14 @@ pipeline {
         GIT_REPO_URL = 'https://github.com/heramatagne/webapp-docker-k8s-project.git' // Define your GitHub repository URL
     }
     
-    stages {
-        stage('Clone Repository') {
-            steps {
-                script {
-                    git branch: 'main', url: GIT_REPO_URL
-                }
-            }
-        }
+    // stages {
+    //     stage('Clone Repository') {
+    //         steps {
+    //             script {
+    //                 git branch: 'main', url: GIT_REPO_URL
+    //             }
+    //         }
+    //     }
         
         stage('Build Docker Image') {
             steps {
