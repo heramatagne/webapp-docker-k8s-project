@@ -23,14 +23,15 @@ pipeline {
                     // Push the built Docker image to Docker Hub
                     // docker.withRegistry('https://index.docker.io/v1/', 'herasidi') {
                     //     docker.image("${DOCKER_HUB_REPO}:${DOCKER_IMAGE_TAG}").push()
-                    }
+                    // }
                 }
             }
         }
+        
         stage('Create EKS Cluster') {
             steps {
                 script {
-                    sh "run eksctl create cluster --name centos-app  --region us-west-2 --ssh-public-key=hera-us-west-2-key-pair --nodes=2 --instance-types=t2.small}"
+                    sh "eksctl create cluster --name centos-app --region us-west-2 --ssh-public-key=hera-us-west-2-key-pair --nodes=2 --instance-types=t2.small"
                     // Wait for cluster to be ready
                     // sh "aws eks wait cluster-active --name ${EKS_CLUSTER_NAME} --region ${AWS_DEFAULT_REGION}"
                 }
