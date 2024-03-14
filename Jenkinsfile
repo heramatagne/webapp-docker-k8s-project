@@ -21,8 +21,8 @@ pipeline {
                     // Build Docker image using Dockerfile from specified path
                     // docker.build("${DOCKER_HUB_REPO}:${DOCKER_IMAGE_TAG}", "${DOCKERFILE_PATH}")
                     // Push the built Docker image to Docker Hub
-                    docker.withRegistry('https://index.docker.io/v1/', 'herasidi') {
-                        docker.image("${DOCKER_HUB_REPO}:${DOCKER_IMAGE_TAG}").push()
+                    // docker.withRegistry('https://index.docker.io/v1/', 'herasidi') {
+                    //     docker.image("${DOCKER_HUB_REPO}:${DOCKER_IMAGE_TAG}").push()
                     }
                 }
             }
