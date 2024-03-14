@@ -13,17 +13,10 @@ pipeline {
     }
     
     stages {
-        // stage('Clone Repository') {
-        //     steps {
-        //         script {
-        //             git branch: 'main', url: GIT_REPO_URL
-        //         }
-        //     }
-        // }
-        
         stage('Build Docker Image') {
             steps {
                 script {
+                    pwd
                     // Build Docker image using Dockerfile from specified path
                     docker.build("${DOCKER_HUB_REPO}:${DOCKER_IMAGE_TAG}", "${DOCKERFILE_PATH}")
                     // Push the built Docker image to Docker Hub
