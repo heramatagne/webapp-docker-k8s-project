@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: centos-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: centos-app
+  template:
+    metadata:
+      labels:
+        app: centos-app
+    spec:
+      containers:
+      - name: centos-app
+        image: herasidi/centos_webapp:webapp
+        ports:
+        - containerPort: 80
