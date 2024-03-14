@@ -9,7 +9,7 @@ pipeline {
         DOCKER_IMAGE_TAG = 'slick'
         // KUBECONFIG = credentials('your-kubeconfig-credential-id')
         // DOCKER_HUB_REPO = 'herasidi/centos_webapp'
-        GIT_REPO_URL = 'https://github.com/heramatagne/webapp-docker-k8s-project/blob/main/webapp/Dockerfile'        
+        // GIT_REPO_URL = 'https://github.com/heramatagne/webapp-docker-k8s-project/blob/main/webapp/Dockerfile'        
     }
     
     stages {
