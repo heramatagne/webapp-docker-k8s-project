@@ -5,7 +5,7 @@ pipeline {
         AWS_DEFAULT_REGION = 'us-west-2'
         EKS_CLUSTER_NAME = 'slick-cluster'
         // ECR_REPOSITORY = 'ecr-repository'
-        DOCKERFILE_PATH = 'webapp/Dockerfile'
+        DOCKERFILE_PATH = 'Dockerfile'
         DOCKER_IMAGE_TAG = 'slick'
         // KUBECONFIG = credentials('your-kubeconfig-credential-id')
         DOCKER_HUB_REPO = 'herasidi/centos_webapp'
