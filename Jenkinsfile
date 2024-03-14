@@ -12,12 +12,12 @@ pipeline {
     }
     
     stages {
-        stage('Source Jenkinsfile from GitHub') {
-            steps {
-                // Check out the project from GitHub repository
-                checkout([$class: 'GitSCM', branches: [[name: 'main']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[url: 'https://github.com/heramatagne/webapp-docker-k8s-project.git']]])
-            }
-        }
+        // stage('Source Jenkinsfile from GitHub') {
+        //     steps {
+        //         // Check out the project from GitHub repository
+        //         checkout([$class: 'GitSCM', branches: [[name: 'main']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[url: 'https://github.com/heramatagne/webapp-docker-k8s-project.git']]])
+        //     }
+        // }
         
         stage('Build Docker Image') {
             steps {
