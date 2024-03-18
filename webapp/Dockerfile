@@ -12,8 +12,9 @@ RUN yum -y update && \
 # Create a directory for the web application
 WORKDIR /var/www/html/
 
+# Assuming webapp directory exists in the same directory as Dockerfile
 # Copy necessary files into the container
-COPY webapp/ .
+COPY ./webapp/ .
 
 # Expose port 80 to the outside world
 EXPOSE 80
