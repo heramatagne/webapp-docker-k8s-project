@@ -9,7 +9,7 @@ RUN yum -y update
 RUN yum -y install httpd && yum clean all    
 
 # Copy the entire folder into the container
-COPY . /var/www/html/
+COPY . /webapp/var/www/html/
 
 # Expose port 80 to the outside world
 EXPOSE 80
