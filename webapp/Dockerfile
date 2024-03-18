@@ -8,8 +8,11 @@ LABEL maintainer="my docker container"
 RUN yum -y update
 RUN yum -y install httpd && yum clean all    
 
-# Copy the entire folder into the container
-COPY . /webapp/var/www/html/
+# Create a directory for the web application
+WORKDIR /var/www/html/
+
+# Copy only necessary files into the container.
+COPY webapp/ ./
 
 # Expose port 80 to the outside world
 EXPOSE 80
