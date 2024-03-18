@@ -11,8 +11,13 @@ RUN yum -y install httpd && yum clean all
 # Create a directory for the web application
 WORKDIR /var/www/html/
 
-# Copy only necessary files into the container.
-COPY webapp/ ./
+# Copy necessary files into the container
+COPY webapp/index.html ./index.html
+COPY webapp/license.txt ./license.txt
+COPY webapp/js/ ./js/
+COPY webapp/img/ ./img/
+COPY webapp/css/ ./css/
+COPY webapp/fonts/ ./fonts/
 
 # Expose port 80 to the outside world
 EXPOSE 80
