@@ -7,7 +7,7 @@ LABEL maintainer="my docker container"
 # Update packages and install Apache
 RUN yum -y update && \
     yum -y install httpd && \
-    yum clean all &&
+    yum clean all
 
 # Create a directory for the web application
 WORKDIR /var/www/html/
@@ -23,4 +23,3 @@ ENTRYPOINT ["/usr/sbin/httpd"]
 
 # Start Apache in the foreground when container starts
 CMD ["-D", "FOREGROUND"]
-
