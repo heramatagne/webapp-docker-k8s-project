@@ -5,11 +5,12 @@ FROM centos:7
 LABEL maintainer="my docker container"
 
 # Update packages and install Apache
-RUN yum -y update
-RUN yum -y install httpd && yum clean all    
+RUN yum -y update && \
+    yum -y install httpd && \
+    yum clean all    
 
 # Copy the entire folder into the container
-COPY . /var/www/html/
+COPY webapp/* /var/www/html/
 
 # Expose port 80 to the outside world
 EXPOSE 80
