@@ -11,8 +11,8 @@ pipeline {
         DOCKER_HUB_REPO = 'herasidi/centos_webapp' // Define your Docker Hub repository name
         GIT_REPO_URL = 'https://github.com/heramatagne/webapp-docker-k8s-project.git' // Define your GitHub repository URL
         MANIFESTS_PATH = '/var/lib/jenkins/workspace/slickapp-pipeline' // Specify the path to your manifest files
-        DEPLOYMENT_YAML_PATH = 'deployment2.yml'
-        SERVICE_YAML_PATH = 'svc.yml'      
+        DEPLOYMENT_YAML_PATH = '/var/lib/jenkins/workspace/slickapp-pipeline/deployment2.yml'
+        SERVICE_YAML_PATH = '/var/lib/jenkins/workspace/slickapp-pipeline/svc.yml'      
     }
     
     stages {
