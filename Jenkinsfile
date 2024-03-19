@@ -34,12 +34,12 @@ pipeline {
                 script {
                     // Change directory to where manifest files are stored
                     dir(MANIFESTS_PATH) {
+                        // Apply deployment YAML
+                        sh 'kubectl apply -f deployment2.yml'
 
-                    // Apply deployment YAML
-                    sh 'kubectl apply -f deployment2.yml'
-
-                    // Apply service YAML
-                    sh 'kubectl apply -f svc.yml'
+                        // Apply service YAML
+                        sh 'kubectl apply -f svc.yml'
+                    }
                 }
             }
         }
