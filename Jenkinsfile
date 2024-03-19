@@ -12,8 +12,7 @@ pipeline {
         GIT_REPO_URL = 'https://github.com/heramatagne/webapp-docker-k8s-project.git' // Define your GitHub repository URL
         MANIFESTS_PATH = '/var/lib/jenkins/workspace/slickapp-pipeline' // Specify the path to your manifest files
         DEPLOYMENT_YAML_PATH = 'deployment2.yml'
-        SERVICE_YAML_PATH = 'svc.yml'
-        K8S_NAMESPACE = "test"        
+        SERVICE_YAML_PATH = 'svc.yml'      
     }
     
     stages {
@@ -37,10 +36,9 @@ pipeline {
                 script {
                     // Update kubeconfig for the EKS cluster
                     sh "aws eks --region ${AWS_DEFAULT_REGION} update-kubeconfig --name ${EKS_CLUSTER_NAME}"
-                    // Create the namespace if it doesn’t exist
-                    // sh "kubectl create namespace ${K8S_NAMESPACE}"                    // Apply deployment YAML
-                    sh "kubectl apply -f ${MANIFESTS_PATH} -n 'default'"
-                    sh "kubectl apply -f ${MANIFESTS_PATH} -n 'default'"
+                    // Apply deployment and service YAML files to the default namespace
+                    sh "kubectl apply -f ${DEPLOYMENT_YAML_PATH}"
+                    sh "kubectl apply -f ${SERVICE_YAML_PATH}"
                 }
             }
         }
