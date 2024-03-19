@@ -38,9 +38,9 @@ pipeline {
                     // Update kubeconfig for the EKS cluster
                     sh "aws eks --region ${AWS_DEFAULT_REGION} update-kubeconfig --name ${EKS_CLUSTER_NAME}"
                     // Create the namespace if it doesn’t exist
-                    sh "kubectl create namespace ${K8S_NAMESPACE}"                    // Apply deployment YAML
-                    sh "kubectl apply -f ${MANIFESTS_PATH} -n ${K8S_NAMESPACE}"
-                    sh "kubectl apply -f ${MANIFESTS_PATH} -n ${K8S_NAMESPACE}"
+                    // sh "kubectl create namespace ${K8S_NAMESPACE}"                    // Apply deployment YAML
+                    sh "kubectl apply -f ${MANIFESTS_PATH} -n 'default'"
+                    sh "kubectl apply -f ${MANIFESTS_PATH} -n 'default'"
                 }
             }
         }
