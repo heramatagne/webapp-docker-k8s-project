@@ -10,6 +10,7 @@ pipeline {
         // KUBECONFIG = credentials('your-kubeconfig-credential-id')
         DOCKER_HUB_REPO = 'herasidi/centos_webapp' // Define your Docker Hub repository name
         GIT_REPO_URL = 'https://github.com/heramatagne/webapp-docker-k8s-project.git' // Define your GitHub repository URL
+        MANIFESTS_PATH = '/var/lib/jenkins/workspace/slickapp-pipeline' // Specify the path to your manifest files    
     }
     
     stages {
@@ -31,8 +32,8 @@ pipeline {
         stage('Deploy to EKS') {
             steps {
                 script {
-                    // Fetch Kubernetes configuration file
-                    checkout scm
+                    // Change directory to where manifest files are stored
+                    dir(MANIFESTS_PATH) {
 
                     // Apply deployment YAML
                     sh 'kubectl apply -f deployment2.yml'
