@@ -3,7 +3,7 @@ pipeline {
     
     environment {
         AWS_DEFAULT_REGION = 'us-west-2'
-        EKS_CLUSTER_NAME = 'slick-cluster'
+        EKS_CLUSTER_NAME = 'centos-app-cluster'
         // ECR_REPOSITORY = 'ecr-repository'
         DOCKERFILE_PATH = '/var/lib/jenkins/workspace/slickapp-pipeline/webapp' // Specify the path to your Dockerfile
         DOCKER_IMAGE_TAG = 'v3'
