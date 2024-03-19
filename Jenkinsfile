@@ -12,7 +12,8 @@ pipeline {
         GIT_REPO_URL = 'https://github.com/heramatagne/webapp-docker-k8s-project.git' // Define your GitHub repository URL
         MANIFESTS_PATH = '/var/lib/jenkins/workspace/slickapp-pipeline' // Specify the path to your manifest files
         DEPLOYMENT_YAML_PATH = 'deployment2.yml'
-        SERVICE_YAML_PATH = 'svc.yml'        
+        SERVICE_YAML_PATH = 'svc.yml'
+        K8S_NAMESPACE = "test"        
     }
     
     stages {
