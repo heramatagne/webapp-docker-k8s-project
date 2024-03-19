@@ -6,7 +6,7 @@ pipeline {
         EKS_CLUSTER_NAME = 'slick-cluster'
         // ECR_REPOSITORY = 'ecr-repository'
         DOCKERFILE_PATH = '//var/lib/jenkins/workspace/slickapp-pipeline/webapp' // Specify the path to your Dockerfile
-        DOCKER_IMAGE_TAG = 'v1'
+        DOCKER_IMAGE_TAG = 'v2'
         // KUBECONFIG = credentials('your-kubeconfig-credential-id')
         DOCKER_HUB_REPO = 'herasidi/centos_webapp' // Define your Docker Hub repository name
         GIT_REPO_URL = 'https://github.com/heramatagne/webapp-docker-k8s-project.git' // Define your GitHub repository URL
