@@ -10,7 +10,9 @@ pipeline {
         // KUBECONFIG = credentials('your-kubeconfig-credential-id')
         DOCKER_HUB_REPO = 'herasidi/centos_webapp' // Define your Docker Hub repository name
         GIT_REPO_URL = 'https://github.com/heramatagne/webapp-docker-k8s-project.git' // Define your GitHub repository URL
-        MANIFESTS_PATH = '/var/lib/jenkins/workspace/slickapp-pipeline' // Specify the path to your manifest files    
+        MANIFESTS_PATH = '/var/lib/jenkins/workspace/slickapp-pipeline' // Specify the path to your manifest files
+        DEPLOYMENT_YAML_PATH = 'deployment2.yml'
+        SERVICE_YAML_PATH = 'svc.yml'        
     }
     
     stages {
@@ -32,14 +34,13 @@ pipeline {
         stage('Deploy to EKS') {
             steps {
                 script {
-                    // Change directory to where manifest files are stored
-                    dir(MANIFESTS_PATH) {
-                        // Apply deployment YAML
-                        sh 'kubectl apply -f deployment2.yml'
-
-                        // Apply service YAML
-                        sh 'kubectl apply -f svc.yml'
-                    }
+                    // Update kubeconfig for the EKS cluster
+                    sh "aws eks --region ${AWS_DEFAULT_REGION} update-kubeconfig --name ${EKS_CLUSTER_NAME}"
+                    // Create the namespace if it doesn’t exist
+                    sh "kubectl create namespace ${K8S_NAMESPACE} --dry-run=client -o yaml | kubectl apply -f -"
+                    // Apply deployment YAML
+                    sh "kubectl apply -f ${DEPLOYMENT_YAML_PATH} -n ${K8S_NAMESPACE}"
+                    sh "kubectl apply -f ${SERVICE_YAML_PATH} -n ${K8S_NAMESPACE}"
                 }
             }
         }
