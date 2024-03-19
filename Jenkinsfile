@@ -19,6 +19,7 @@ pipeline {
                     sh 'pwd' // Print the current directory
                     sh 'ls'
                     sh 'cd webapp'
+                    sh 'ls -l'
                     // Build Docker image using Dockerfile from specified path
                     docker.build("${DOCKER_HUB_REPO}:${DOCKER_IMAGE_TAG}", "${DOCKERFILE_PATH}")
                     // Push the built Docker image to Docker Hub
