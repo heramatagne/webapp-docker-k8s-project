@@ -1,31 +1,37 @@
 pipeline {
     agent any
-    
+
     environment {
         AWS_DEFAULT_REGION = 'us-west-2'
         EKS_CLUSTER_NAME = 'centos-app-cluster'
-        // ECR_REPOSITORY = 'ecr-repository'
-        DOCKERFILE_PATH = '/var/lib/jenkins/workspace/slickapp-pipeline/webapp' // Specify the path to your Dockerfile
+        DOCKERFILE_PATH = 'webapp' // Relative path to your Dockerfile from the workspace
         DOCKER_IMAGE_TAG = 'v4'
-        // KUBECONFIG = credentials('your-kubeconfig-credential-id')
         DOCKER_HUB_REPO = 'herasidi/centos_webapp' // Define your Docker Hub repository name
         GIT_REPO_URL = 'https://github.com/heramatagne/webapp-docker-k8s-project.git' // Define your GitHub repository URL
-        MANIFESTS_PATH = '/var/lib/jenkins/workspace/slickapp-pipeline' // Specify the path to your manifest files
-        DEPLOYMENT_YAML_PATH = '/var/lib/jenkins/workspace/slickapp-pipeline/deployment2.yml'
-        SERVICE_YAML_PATH = '/var/lib/jenkins/workspace/slickapp-pipeline/svc.yml'      
+        MANIFESTS_PATH = '.' // Specify the path to your manifest files (relative to workspace)
+        DEPLOYMENT_YAML_PATH = 'deployment2.yml' // Relative path to deployment YAML file
+        SERVICE_YAML_PATH = 'svc.yml' // Relative path to service YAML file
     }
-    
+
     stages {
+        stage('Checkout Code') {
+            steps {
+                script {
+                    echo "Cloning the code"
+                    git url: "${GIT_REPO_URL}", branch: 'main'
+                }
+            }
+        }
+
         stage('Build Docker Image') {
             steps {
                 script {
-                    sh 'pwd' // Print the current directory
-                    sh 'ls -l'
-                    Build Docker image using Dockerfile from specified path
-                    docker.build("${DOCKER_HUB_REPO}:${DOCKER_IMAGE_TAG}", "${DOCKERFILE_PATH}")
-                    Push the built Docker image to Docker Hub
+                    echo "Building Docker image"
+                    // Build Docker image using Dockerfile from specified path
+                    def dockerImage = docker.build("${DOCKER_HUB_REPO}:${DOCKER_IMAGE_TAG}", "${DOCKERFILE_PATH}")
+                    // Push the built Docker image to Docker Hub
                     docker.withRegistry('https://index.docker.io/v1/', 'dockerhub') {
-                        docker.image("${DOCKER_HUB_REPO}:${DOCKER_IMAGE_TAG}").push()
+                        dockerImage.push()
                     }
                 }
             }
@@ -34,6 +40,7 @@ pipeline {
         stage('Deploy to EKS') {
             steps {
                 script {
+                    echo "Deploying to EKS"
                     // Update kubeconfig for the EKS cluster
                     sh "aws eks --region ${AWS_DEFAULT_REGION} update-kubeconfig --name ${EKS_CLUSTER_NAME}"
                     // Apply deployment and service YAML files to the default namespace
