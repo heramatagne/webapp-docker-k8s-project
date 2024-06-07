@@ -37,10 +37,24 @@ pipeline {
             }
         }
 
+//         stage('Deploy to EKS') {
+//             steps {
+//                 script {
+//                     echo "Deploying to EKS"
+//                     // Update kubeconfig for the EKS cluster
+//                     sh "aws eks --region ${AWS_DEFAULT_REGION} update-kubeconfig --name ${EKS_CLUSTER_NAME}"
+//                     // Apply deployment and service YAML files to the default namespace
+//                     sh "kubectl apply -f ${DEPLOYMENT_YAML_PATH}"
+//                     sh "kubectl apply -f ${SERVICE_YAML_PATH}"
+//                 }
+//             }
+//         }
+//     }
+// }
+
         stage('Deploy to EKS') {
             steps {
                 script {
-                    echo "Deploying to EKS"
                     // Update kubeconfig for the EKS cluster
                     sh "aws eks --region ${AWS_DEFAULT_REGION} update-kubeconfig --name ${EKS_CLUSTER_NAME}"
                     // Apply deployment and service YAML files to the default namespace
